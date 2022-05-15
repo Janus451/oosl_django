@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>My test page</title>
+      </head>
+      <body>
+        <fieldset name="Courses">
+            <legend><h1>Enroll</h1></legend>
+            {% if course_list %}
+                <ul style="list-style: none;">
+                    {% for course in course_list %}
+    
+                    <li> <form action="{% url 'course_manager:enroll_in_course' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <input type="hidden" id="course_name" name="course_name" value={{course.course_name}}>
+                        <input type="hidden" id="student_id" name="student_id" value={{pk}}>
+                        <button type="submit" class="btn btn-default btn-sm">{{course.course_name}}</button>
+                    </form></li>
+         
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No courses are available.</p>
+            {% endif %}
+          </fieldset>
+        
+        {{ id }}
+      </body>
+</html>

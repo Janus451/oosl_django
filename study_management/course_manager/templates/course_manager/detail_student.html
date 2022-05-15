@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Student Details</title>
+      </head>
+      <body>
+        <fieldset>               
+            {% if error_message %}
+                <p><strong>{{ error_message }}</strong></p>
+            {% endif %}
+            <form action="{% url 'course_manager:edit_student' student.student_id  %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h1>{{student}}</h1>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default btn-sm">Edit</button>
+                    </div>
+                </div>
+            </form>
+            <form action="{% url 'course_manager:delete_student' student.student_id %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-default btn-sm">Delete</button>
+            </form>
+            <form action="{% url 'course_manager:enroll_student' student.student_id %}">
+                <button type="submit" class="btn btn-default btn-sm">Enroll</button>
+            </form>
+        </fieldset>
+      </body>
+</html>

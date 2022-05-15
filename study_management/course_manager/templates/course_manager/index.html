@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My test page</title>
+  </head>
+  <body>
+      <fieldset name= "Students">
+        <legend><h1>Students</h1></legend>
+        {% if student_list %}
+            <ul style="list-style: none;">
+                {% for student in student_list %}
+        
+                    <li> <a href="{% url 'course_manager:detail_student' student.student_id %}">{{ student }}</a></li>
+                
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No students are available.</p>
+        {% endif %}
+        
+        <form action="{% url 'course_manager:add_student'  %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-default btn-sm">Add</button>
+        </form>
+      </fieldset>
+      <fieldset name="Courses">
+        <legend><h1>Courses</h1></legend>
+        {% if course_list %}
+            <ul style="list-style: none;">
+                {% for course in course_list %}
+
+                <li> <a href="{% url 'course_manager:detail_course' course.id %}">{{ course }}</a></li>
+     
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No courses are available.</p>
+        {% endif %}
+        <form action="{% url 'course_manager:add_course'  %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-default btn-sm">Add</button>
+        </form>
+      </fieldset>
+
+  </body>
+</html>

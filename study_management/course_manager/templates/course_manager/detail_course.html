@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Course Details</title>
+      </head>
+      <body>
+        <fieldset> 
+            <legend><h1>Enroll</h1></legend>              
+            {% if error_message %}
+                <p><strong>{{ error_message }}</strong></p>
+            {% endif %}
+                <h1>{{Course}}</h1>
+                <ul style="list-style: none;">
+                {% for student in course.enrolled_students.all %}
+
+                <li> {{ student}}</li>
+     
+                {% endfor %}
+            </ul>
+            <form action="{% url 'course_manager:edit_course' course.id  %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h1>{{student}}</h1>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default btn-sm">Edit</button>
+                    </div>
+                </div>
+            </form>
+            <form action="{% url 'course_manager:delete_course' course.id %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-default btn-sm">Delete</button>
+            </form>    
+        </fieldset>
+      </body>
+</html>
